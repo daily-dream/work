@@ -8,8 +8,8 @@ import scipy.stats as st
 import math
 
 # 读取男性和女性的身高数据，使用 sep='\s+' 替代 delim_whitespace
-male_data = pd.read_csv('./MALE.TXT', sep='\s+')
-female_data = pd.read_csv('./FEMALE.TXT', sep='\s+')
+male_data = pd.read_csv('./MALE.TXT', sep=r'\s+')
+female_data = pd.read_csv('./FEMALE.TXT', sep=r'\s+')
 
 # 只取身高数据
 male_height = male_data.iloc[:, 0].values
@@ -49,7 +49,7 @@ def p_female_x(x):
 
 
 # 读取测试数据，使用 sep='\s+' 替代 delim_whitespace
-test_data = pd.read_csv('./test2.txt', sep='\s+')
+test_data = pd.read_csv('./test2.txt', sep=r'\s+')
 height = test_data.iloc[:, 0].values
 labels_test = test_data.iloc[:, 2].values
 
@@ -80,9 +80,9 @@ def min_risk_decision(x, a, b):
         return 2  # 女性
 
 
-# 假设错误分类的代价相同
+# 设定错误分类的代价
 a = 1
-b = 18
+b = 12
 
 # 预测标签
 label_pred_min_risk = []

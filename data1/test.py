@@ -6,8 +6,8 @@ import scipy.stats as st
 import math
 
 # 读取男性和女性的身高数据，最开始使用 delim_whitespace，结果报错了，使用使用 sep='\s+' 替代
-male_data = pd.read_csv('./MALE.TXT', sep='\s+')
-female_data = pd.read_csv('./FEMALE.TXT', sep='\s+')
+male_data = pd.read_csv('./MALE.TXT', sep=r'\s+')
+female_data = pd.read_csv('./FEMALE.TXT', sep=r'\s+')
 
 # 只取身高数据
 male_height = male_data.iloc[:, 0].values
@@ -30,8 +30,8 @@ def normal_female(x):
     return st.norm.pdf(x, loc=theta1_female, scale=math.sqrt(theta2_female))
 
 # 设置先验概率
-p_male = 0.5
-p_female = 0.5
+p_male = 0.9
+p_female = 0.1
 
 # 定义后验概率函数
 def p_male_x(x):
@@ -41,7 +41,7 @@ def p_female_x(x):
     return (normal_female(x) * p_female) / (normal_male(x) * p_male + normal_female(x) * p_female)
 
 # 读取测试数据
-test_data = pd.read_csv('./test1.txt', sep='\s+')
+test_data = pd.read_csv('./test1.txt', sep=r'\s+')
 height = test_data.iloc[:, 0].values
 labels_test = test_data.iloc[:, 2].values
 
